@@ -15,8 +15,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hsflensburg.java.gwt.ws2016.shared.DemoService;
 import de.hsflensburg.java.gwt.ws2016.shared.DemoServiceAsync;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
+/**********************************
+ * This class defines the main entry point of this application.
  */
 public class DemoApp implements EntryPoint
 {
@@ -35,8 +35,9 @@ public class DemoApp implements EntryPoint
 
 	private Button aSendButton;
 
-	/**
-	 * This is the entry point method.
+	/**********************************
+	 * The starting method of the GWT {@link EntryPoint}, comparable to a main
+	 * method in other application types.
 	 */
 	@Override
 	public void onModuleLoad()
@@ -63,13 +64,33 @@ public class DemoApp implements EntryPoint
 		});
 	}
 
+	/**********************************
+	 * Displays a server error.
+	 *
+	 * @param sSentText The text that had been sent to the server
+	 * @param rCaught The exception received from the server
+	 */
+	private void displayServerError(String sSentText, Throwable rCaught)
+	{
+		String sError = SERVER_ERROR + "<br>" + rCaught.toString();
+		displayServerResponse("Server Error", sSentText, sError);
+	}
+
+	/**********************************
+	 * Displays a dialog box with a response that has been received from the
+	 * server.
+	 *
+	 * @param sTitle The dialog title
+	 * @param sSentText The text that had been sent to the server
+	 * @param sResponse The response text from the server
+	 */
 	private void displayServerResponse(String sTitle, String sSentText,
-			String sReceivedText)
+			String sResponse)
 	{
 		DialogBox aDialogBox = new DialogBox();
 		VerticalPanel aDialogPanel = new VerticalPanel();
 		Label aTextToServer = new Label(sSentText);
-		HTML aServerResponse = new HTML(sReceivedText);
+		HTML aServerResponse = new HTML(sResponse);
 		Button aCloseButton = new Button("Close");
 
 		aDialogBox.setText(sTitle);
@@ -106,8 +127,7 @@ public class DemoApp implements EntryPoint
 			@Override
 			public void onFailure(Throwable rCaught)
 			{
-				String sError = SERVER_ERROR + "<br>" + rCaught.toString();
-				displayServerResponse("Server Error", sText, sError);
+				displayServerError(sText, rCaught);
 			}
 
 			@Override

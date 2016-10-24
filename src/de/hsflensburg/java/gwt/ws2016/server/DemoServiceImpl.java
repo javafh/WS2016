@@ -4,8 +4,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hsflensburg.java.gwt.ws2016.shared.DemoService;
 
-/**
- * The server-side implementation of the RPC service.
+/**********************************
+ * The server implementation of this application.
  */
 @SuppressWarnings("serial")
 public class DemoServiceImpl extends RemoteServiceServlet implements DemoService
@@ -26,7 +26,7 @@ public class DemoServiceImpl extends RemoteServiceServlet implements DemoService
 				+ "<p> The text you sent is:<br>" + sText;
 	}
 
-	/**
+	/**********************************
 	 * Escape an HTML string. Escaping data received from the client helps to
 	 * prevent cross-site script vulnerabilities.
 	 *
