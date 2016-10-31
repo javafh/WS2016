@@ -52,16 +52,16 @@ public class DemoApp implements EntryPoint
 		RootPanel.get("sendButtonContainer").add(aSendButton);
 
 		aTextInput.setFocus(true);
-
-		aSendButton
-				.addClickHandler(e -> sendTextToServer(aTextInput.getText()));
-
 		aTextInput.addKeyUpHandler(e -> {
 			if (e.getNativeKeyCode() == KeyCodes.KEY_ENTER)
 			{
 				sendTextToServer(aTextInput.getText());
 			}
 		});
+
+		aSendButton
+				.addClickHandler(e -> sendTextToServer(aTextInput.getText()));
+
 	}
 
 	/**********************************

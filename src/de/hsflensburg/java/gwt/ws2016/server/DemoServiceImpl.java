@@ -10,6 +10,24 @@ import de.hsflensburg.java.gwt.ws2016.shared.DemoService;
 @SuppressWarnings("serial")
 public class DemoServiceImpl extends RemoteServiceServlet implements DemoService
 {
+	/**********************************
+	 * Escape an HTML string. Escaping data received from the client helps to
+	 * prevent cross-site script vulnerabilities.
+	 *
+	 * @param sText the HTML string to escape
+	 *
+	 * @return the escaped string
+	 */
+	public static String escapeHtml(String sText)
+	{
+		if (sText != null)
+		{
+			sText = sText.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+					.replaceAll(">", "&gt;");
+		}
+		return sText;
+	}
+
 	@Override
 	public String sendText(String sText) throws IllegalArgumentException
 	{
@@ -24,23 +42,5 @@ public class DemoServiceImpl extends RemoteServiceServlet implements DemoService
 		return "Hello! This server is running " + sServerInfo
 				+ ".<p>It looks like you are using:<br>" + sUserAgent
 				+ "<p> The text you sent is:<br>" + sText;
-	}
-
-	/**********************************
-	 * Escape an HTML string. Escaping data received from the client helps to
-	 * prevent cross-site script vulnerabilities.
-	 *
-	 * @param sText the HTML string to escape
-	 *
-	 * @return the escaped string
-	 */
-	private String escapeHtml(String sText)
-	{
-		if (sText != null)
-		{
-			sText = sText.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
-					.replaceAll(">", "&gt;");
-		}
-		return sText;
 	}
 }
