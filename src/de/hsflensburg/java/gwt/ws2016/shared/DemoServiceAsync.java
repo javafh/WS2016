@@ -8,6 +8,5 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface DemoServiceAsync
 {
-	void sendText(String sText, AsyncCallback<String> rCallback)
-			throws IllegalArgumentException;
+	void login(String sUserName, String sPassword, AsyncCallback<Void> rCallback);
 }

@@ -1,5 +1,7 @@
 package de.hsflensburg.java.gwt.ws2016.server;
 
+import javax.naming.AuthenticationException;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hsflensburg.java.gwt.ws2016.shared.DemoService;
@@ -29,18 +31,15 @@ public class DemoServiceImpl extends RemoteServiceServlet implements DemoService
 	}
 
 	@Override
-	public String sendText(String sText) throws IllegalArgumentException
+	public void login(String sUserName, String sPassword)
+			throws AuthenticationException
 	{
-		String sServerInfo = getServletContext().getServerInfo();
-		String sUserAgent = getThreadLocalRequest().getHeader("User-Agent");
-
-		// Escape data from the client to avoid cross-site script
-		// vulnerabilities.
-		sText = escapeHtml(sText);
-		sUserAgent = escapeHtml(sUserAgent);
-
-		return "Hello! This server is running " + sServerInfo
-				+ ".<p>It looks like you are using:<br>" + sUserAgent
-				+ "<p> The text you sent is:<br>" + sText;
+		if ("test".equals(sUserName) && "test".equals(sPassword))
+		{
+		}
+		else
+		{
+			throw new AuthenticationException("AuthenticationFailed");
+		}
 	}
 }
