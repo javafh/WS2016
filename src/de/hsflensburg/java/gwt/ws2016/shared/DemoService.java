@@ -1,7 +1,5 @@
 package de.hsflensburg.java.gwt.ws2016.shared;
 
-import javax.naming.AuthenticationException;
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -11,5 +9,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("demo")
 public interface DemoService extends RemoteService
 {
-	public void login(String sUserName, String sPassword) throws AuthenticationException;
+	public void login(String sUserName, String sPassword)
+			throws AuthenticationException;
 }

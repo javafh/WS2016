@@ -1,9 +1,8 @@
 package de.hsflensburg.java.gwt.ws2016.server;
 
-import javax.naming.AuthenticationException;
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hsflensburg.java.gwt.ws2016.shared.AuthenticationException;
 import de.hsflensburg.java.gwt.ws2016.shared.DemoService;
 
 /**********************************

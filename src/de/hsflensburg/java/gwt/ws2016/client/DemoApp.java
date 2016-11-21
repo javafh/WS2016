@@ -2,6 +2,7 @@ package de.hsflensburg.java.gwt.ws2016.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hsflensburg.java.gwt.ws2016.shared.DemoService;
 import de.hsflensburg.java.gwt.ws2016.shared.DemoServiceAsync;
@@ -23,5 +24,8 @@ public class DemoApp implements EntryPoint
 	@Override
 	public void onModuleLoad()
 	{
+		LoginPanel aLoginPanel = new LoginPanel();
+
+		RootPanel.get().add(aLoginPanel);
 	}
 }
