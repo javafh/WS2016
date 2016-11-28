@@ -13,7 +13,7 @@ public class LoginPanel extends Composite
 	 *
 	 * @see Composite#Composite()
 	 */
-	public LoginPanel()
+	public LoginPanel(LoginHandler rLoginHandler)
 	{
 		Grid aMainPanel = new Grid(3, 2);
 		TextBox aLoginNameField = new TextBox();
@@ -26,6 +26,16 @@ public class LoginPanel extends Composite
 		aMainPanel.setWidget(1, 1, aPasswordField);
 		aMainPanel.setWidget(2, 1, aLoginButton);
 
+		aMainPanel.addStyleName(getClass().getSimpleName());
+
+		aLoginButton.addClickHandler(e -> rLoginHandler.handleLogin(
+				aLoginNameField.getText(), aPasswordField.getText()));
+
 		initWidget(aMainPanel);
+	}
+
+	public static interface LoginHandler
+	{
+		public void handleLogin(String sUserName, String sPassword);
 	}
 }

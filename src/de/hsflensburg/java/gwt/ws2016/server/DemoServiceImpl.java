@@ -1,5 +1,8 @@
 package de.hsflensburg.java.gwt.ws2016.server;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hsflensburg.java.gwt.ws2016.shared.AuthenticationException;
@@ -11,6 +14,8 @@ import de.hsflensburg.java.gwt.ws2016.shared.DemoService;
 @SuppressWarnings("serial")
 public class DemoServiceImpl extends RemoteServiceServlet implements DemoService
 {
+	private Map<String, UserInfo> aUserDatabase = new HashMap<>();
+
 	/**********************************
 	 * Escape an HTML string. Escaping data received from the client helps to
 	 * prevent cross-site script vulnerabilities.
