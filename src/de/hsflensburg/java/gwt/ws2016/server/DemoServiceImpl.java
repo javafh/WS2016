@@ -1,7 +1,14 @@
 package de.hsflensburg.java.gwt.ws2016.server;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -35,10 +42,43 @@ public class DemoServiceImpl extends RemoteServiceServlet implements DemoService
 	}
 
 	@Override
+	public void destroy()
+	{
+		try (OutputStream aDatabaseFile = new FileOutputStream(
+				"userdatabase.db"))
+		{
+			ObjectOutputStream aDatabaseStream = new ObjectOutputStream(
+					aDatabaseFile);
+
+			aDatabaseStream.writeObject(aUserDatabase);
+		}
+		catch (IOException e)
+		{
+			System.err.printf("ERROR: Could not store database (%s)\n",
+					e.getMessage());
+		}
+
+		super.destroy();
+	}
+
+	@Override
+	public void init(ServletConfig rConfig) throws ServletException
+	{
+		super.init(rConfig);
+
+		UserInfo aTestUserInfo = new UserInfo();
+
+		aTestUserInfo.updatePassword("admin");
+		aUserDatabase.put("admin", aTestUserInfo);
+	}
+
+	@Override
 	public void login(String sUserName, String sPassword)
 			throws AuthenticationException
 	{
-		if ("test".equals(sUserName) && "test".equals(sPassword))
+		UserInfo rUserInfo = aUserDatabase.get(sUserName);
+
+		if (rUserInfo != null && rUserInfo.isPasswordValid(sPassword))
 		{
 		}
 		else

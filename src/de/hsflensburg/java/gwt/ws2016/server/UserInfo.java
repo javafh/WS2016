@@ -6,6 +6,11 @@ public class UserInfo
 
 	public boolean isPasswordValid(String sPassword)
 	{
-		return false;
+		return BCrypt.checkpw(sPassword, sPasswordHash);
+	}
+
+	public void updatePassword(String sPassword)
+	{
+		sPasswordHash = BCrypt.hashpw(sPassword, BCrypt.gensalt());
 	}
 }
