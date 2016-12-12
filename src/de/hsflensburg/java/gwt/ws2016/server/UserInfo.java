@@ -1,7 +1,11 @@
 package de.hsflensburg.java.gwt.ws2016.server;
 
-public class UserInfo
+import java.io.Serializable;
+
+public class UserInfo implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	private String sPasswordHash;
 
 	public boolean isPasswordValid(String sPassword)
